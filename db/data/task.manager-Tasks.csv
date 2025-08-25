@@ -1,0 +1,4 @@
+ID;title;description;dueDate;urgency_code;status_code;createdAt;createdBy;modifiedAt;modifiedBy
+11111111-1111-1111-1111-111111111111;Projektplan erstellen;Erster Entwurf des Projektplans;2025-09-01;H;O;2025-08-25T08:00:00Z;user1;2025-08-25T08:00:00Z;user1
+22222222-2222-2222-2222-222222222222;Meeting vorbereiten;Folien und Agenda für Kickoff;2025-09-05;M;I;2025-08-25T08:30:00Z;user2;2025-08-25T08:30:00Z;user2
+33333333-3333-3333-3333-333333333333;Code Review durchführen;Überprüfung des neuen Moduls;2025-09-10;L;B;2025-08-25T09:15:00Z;user1;2025-08-25T09:15:00Z;user1

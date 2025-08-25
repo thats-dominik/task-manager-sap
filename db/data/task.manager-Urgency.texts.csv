@@ -1,0 +1,7 @@
+code,locale,name,descr
+H,en,High,High urgency
+M,en,Medium,Medium urgency
+L,en,Low,Low urgency
+H,de,Hoch,Hohe Dringlichkeit
+M,de,Mittel,Normale Dringlichkeit
+L,de,Niedrig,Geringe Dringlichkeit

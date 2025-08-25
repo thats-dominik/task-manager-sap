@@ -1,0 +1,9 @@
+code,locale,name,descr
+O,en,Open,Task is open
+I,en,In Progress,Task is being worked on
+B,en,Blocked,Task is blocked
+D,en,Done,Task is completed
+O,de,Offen,Aufgabe ist offen
+I,de,In Bearbeitung,Aufgabe wird bearbeitet
+B,de,Blockiert,Aufgabe ist blockiert
+D,de,Erledigt,Aufgabe ist erledigt

@@ -1,0 +1,5 @@
+code,criticality,name,descr
+O,1,Open,Task is open
+I,2,In Progress,Task is being worked on
+B,3,Blocked,Task is blocked
+D,0,Done,Task is completed
