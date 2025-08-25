@@ -1,18 +1,18 @@
 using { task.manager as my } from '../db/schema';
 
 /** worker: lesen + status ändern; kommentare schreiben */
-service TaskWorkerService @(requires: 'authenticated-user') {
+service TaskWorkerService @(requires: ['worker']) {
   @odata.draft.enabled
   @cds.redirection.target
 
   @restrict: [
-    { grant: ['READ','UPDATE'], to: 'support' },
+    { grant: ['READ','UPDATE'], to: 'worker' },
     { grant: '*',               to: 'admin' }   // admin darf alles hier
   ]
   entity Tasks    as projection on my.Tasks;
 
   @restrict: [
-    { grant: ['READ','CREATE'], to: 'support' },
+    { grant: ['READ','CREATE'], to: 'worker' },
     { grant: '*',               to: 'admin' }
   ]
   entity Comments as projection on my.Comments;
@@ -22,7 +22,7 @@ service TaskWorkerService @(requires: 'authenticated-user') {
 }
 
 /** giver: aufgaben anlegen/bearbeiten; kommentare lesen */
-service TaskGiverService @(requires: 'authenticated-user') {
+service TaskGiverService @(requires: 'giver') {
   @odata.draft.enabled
   @cds.redirection.target
 

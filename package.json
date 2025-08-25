@@ -26,7 +26,7 @@
       "auth": {
         "kind": "mocked",
         "users": {
-          "worker1": {"roles": ["support"] },
+          "worker1": {"roles": ["worker"] },
           "giver1":  {"roles": ["giver"] },
           "admin1":  {"roles": ["admin"] }
         }

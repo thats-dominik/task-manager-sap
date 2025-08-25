@@ -1,26 +1,13 @@
 {
-  "xsappname": "task-managing-app-<space-or-unique>",
-  "tenant-mode": "dedicated",
+  "xsappname": "task-managing-application",
   "scopes": [
-    { "name": "$XSAPPNAME.support", "description": "Task worker/support" },
-    { "name": "$XSAPPNAME.giver",   "description": "Task giver" },
-    { "name": "$XSAPPNAME.admin",   "description": "Administrator" }
+    { "name": "$XSAPPNAME.admin",   "description": "Admin access" },
+    { "name": "$XSAPPNAME.giver",   "description": "Task giver access" },
+    { "name": "$XSAPPNAME.worker", "description": "Task worker access" }
   ],
   "role-templates": [
-    {
-      "name": "Support",
-      "description": "Worker role",
-      "scope-references": ["$XSAPPNAME.support"]
-    },
-    {
-      "name": "Giver",
-      "description": "Giver role",
-      "scope-references": ["$XSAPPNAME.giver"]
-    },
-    {
-      "name": "Admin",
-      "description": "Admin role",
-      "scope-references": ["$XSAPPNAME.admin"]
-    }
+    { "name": "Admin",   "description": "Admin role",   "scope-references": ["$XSAPPNAME.admin"] },
+    { "name": "Giver",   "description": "Giver role",   "scope-references": ["$XSAPPNAME.giver"] },
+    { "name": "Worker", "description": "Worker role",  "scope-references": ["$XSAPPNAME.worker"] }
   ]
 }

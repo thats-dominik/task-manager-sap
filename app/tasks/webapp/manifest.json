@@ -15,16 +15,16 @@
       "version": "1.18.5",
       "toolsId": "fa86873b-ffaf-4865-9a81-4ff548c4ea1b"
     },
-    "dataSources": {
-      "mainService": {
-        "uri": "/odata/v4/admin/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "odataVersion": "4.0"
-        }
+  "dataSources": {
+    "mainService": {
+      "uri": "/odata/v4/task-worker/",
+      "type": "OData",
+      "settings": {
+        "annotations": [],
+        "odataVersion": "4.0"
       }
     }
+  }
   },
   "sap.ui": {
     "technology": "UI5",
