@@ -2,25 +2,41 @@
   "xsappname": "task-managing-app-<space-or-unique>",
   "tenant-mode": "dedicated",
   "scopes": [
-    { "name": "$XSAPPNAME.support", "description": "Task worker/support" },
-    { "name": "$XSAPPNAME.giver",   "description": "Task giver" },
-    { "name": "$XSAPPNAME.admin",   "description": "Administrator" }
+    {
+      "name": "$XSAPPNAME.praktikant",
+      "description": "Praktikant"
+    },
+    {
+      "name": "$XSAPPNAME.mitarbeiter",
+      "description": "Mitarbeiter"
+    },
+    {
+      "name": "$XSAPPNAME.chef",
+      "description": "Chef"
+    }
   ],
   "role-templates": [
     {
-      "name": "Support",
-      "description": "Worker role",
-      "scope-references": ["$XSAPPNAME.support"]
+      "name": "Praktikant",
+      "description": "Rolle Praktikant",
+      "scope-references": [
+        "$XSAPPNAME.praktikant"
+      ]
     },
     {
-      "name": "Giver",
-      "description": "Giver role",
-      "scope-references": ["$XSAPPNAME.giver"]
+      "name": "Mitarbeiter",
+      "description": "Rolle Mitarbeiter",
+      "scope-references": [
+        "$XSAPPNAME.mitarbeiter"
+      ]
     },
     {
-      "name": "Admin",
-      "description": "Admin role",
-      "scope-references": ["$XSAPPNAME.admin"]
+      "name": "Chef",
+      "description": "Rolle Chef",
+      "scope-references": [
+        "$XSAPPNAME.chef"
+      ]
     }
-  ]
+  ],
+  "attributes": []
 }
