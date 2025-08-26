@@ -1,15 +1,15 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Mon Aug 25 2025 07:37:26 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Tue Aug 26 2025 08:43:36 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>SAP Fiori Application Generator|
 |**App Generator Version**<br>1.18.5|
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>List Report Page V4|
 |**Service Type**<br>Local CAP|
-|**Service URL**<br>http://localhost:4004/odata/v4/task-worker/|
+|**Service URL**<br>http://localhost:4004/odata/v4/processor/|
 |**Module Name**<br>tasks|
-|**Application Title**<br>task-managing-application|
+|**Application Title**<br>task-management-application|
 |**Namespace**<br>ns|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.139.0|

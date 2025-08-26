@@ -7,34 +7,60 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^9",
-    "express": "^4"
+    "express": "^4",
+    "@cap-js/hana": "^2",
+    "@sap/xssec": "^4"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^2",
-    "@cap-js/cds-types": "^0.13.0"
+    "@cap-js/cds-test": "^0.4.0",
+    "@cap-js/cds-types": "^0.13.0",
+    "@cap-js/sqlite": "^2"
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-tasks": "cds watch --open tasks/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-tasks": "cds watch --open tasks/webapp/index.html?sap-ui-xx-viewCache=false",
+    "test": "npx jest tests/test.js"
   },
-"cds": {
-  "requires": {
-    "[development]": {
+  "cds": {
+    "requires": {
       "auth": {
         "kind": "mocked",
         "users": {
-          "worker1": {"roles": ["worker"] },
-          "giver1":  {"roles": ["giver"] },
-          "admin1":  {"roles": ["admin"] }
+          "heiko": {
+            "roles": [
+              "chef"
+            ]
+          },
+          "heiker": {
+            "roles": [
+              "mitarbeiter"
+            ]
+          },
+          "heikel": {
+            "roles": [
+              "praktikant"
+            ]
+          }
         }
-      }
+      },
+      "[production]": {
+        "db": "hana",
+        "auth": {
+          "kind": "xsuaa"
+        }
+      },
+      "destinations": true,
+      "html5-runtime": true,
+      "workzone": true
     }
-  }
-},
+  },
   "sapux": [
+    "app/tasks",
+    "app/task-managing-application",
+    "app/tasks",
     "app/tasks"
   ]
 }

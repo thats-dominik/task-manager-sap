@@ -1,13 +1,42 @@
 {
-  "xsappname": "task-managing-application",
+  "xsappname": "task-managing-app-<space-or-unique>",
+  "tenant-mode": "dedicated",
   "scopes": [
-    { "name": "$XSAPPNAME.admin",   "description": "Admin access" },
-    { "name": "$XSAPPNAME.giver",   "description": "Task giver access" },
-    { "name": "$XSAPPNAME.worker", "description": "Task worker access" }
+    {
+      "name": "$XSAPPNAME.praktikant",
+      "description": "Praktikant"
+    },
+    {
+      "name": "$XSAPPNAME.mitarbeiter",
+      "description": "Mitarbeiter"
+    },
+    {
+      "name": "$XSAPPNAME.chef",
+      "description": "Chef"
+    }
   ],
   "role-templates": [
-    { "name": "Admin",   "description": "Admin role",   "scope-references": ["$XSAPPNAME.admin"] },
-    { "name": "Giver",   "description": "Giver role",   "scope-references": ["$XSAPPNAME.giver"] },
-    { "name": "Worker", "description": "Worker role",  "scope-references": ["$XSAPPNAME.worker"] }
-  ]
+    {
+      "name": "Praktikant",
+      "description": "Rolle Praktikant",
+      "scope-references": [
+        "$XSAPPNAME.praktikant"
+      ]
+    },
+    {
+      "name": "Mitarbeiter",
+      "description": "Rolle Mitarbeiter",
+      "scope-references": [
+        "$XSAPPNAME.mitarbeiter"
+      ]
+    },
+    {
+      "name": "Chef",
+      "description": "Rolle Chef",
+      "scope-references": [
+        "$XSAPPNAME.chef"
+      ]
+    }
+  ],
+  "attributes": []
 }
