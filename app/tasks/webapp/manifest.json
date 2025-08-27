@@ -4,9 +4,7 @@
     "id": "ns.tasks",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
+    "applicationVersion": { "version": "0.0.1" },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
@@ -19,9 +17,16 @@
       "mainService": {
         "uri": "/odata/v4/processor/",
         "type": "OData",
-        "settings": {
-          "annotations": [],
-          "odataVersion": "4.0"
+        "settings": { "annotations": [], "odataVersion": "4.0" }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "display": {
+          "semanticObject": "Tasks",
+          "action": "display",
+          "title": "{{appTitle}}",
+          "signature": { "parameters": {}, "additionalParameters": "allowed" }
         }
       }
     }
