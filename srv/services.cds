@@ -38,4 +38,5 @@ service ProcessorService @(requires: 'authenticated-user') {
     { grant: ['READ'], to: ['praktikant','mitarbeiter','chef'] }
   ]
   entity Urgency as projection on my.Urgency;
+  
 }
