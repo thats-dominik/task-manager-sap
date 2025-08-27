@@ -1,5 +1,5 @@
 {
-  "xsappname": "task-managing-app-<space-or-unique>",
+  "xsappname": "task-managing-application-${org}-${space}",
   "tenant-mode": "dedicated",
   "scopes": [
     {

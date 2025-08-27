@@ -11,24 +11,24 @@ build-parameters:
       commands:
         - npm ci
         - npx cds build --production
+ 
 modules:
   - name: task-managing-application-srv
     type: nodejs
     path: gen/srv
     parameters:
-      instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
-      builder: npm-ci
+      builder: npm
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: srv-api
         properties:
           srv-url: ${default-url}
     requires:
-      - name: task-managing-application-auth
       - name: task-managing-application-db
+      - name: task-managing-application-auth
       - name: task-managing-application-destination
-
+ 
   - name: task-managing-application-db-deployer
     type: hdb
     path: gen/db
@@ -36,33 +36,102 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: task-managing-application-db
-
+ 
+  - name: task-managingapp
+    type: html5
+    path: app/tasks
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+      supported-platforms: []
+      build-artifact-name: tasks.zip
+ 
   - name: task-managing-application-app-deployer
     type: com.sap.application.content
-    path: gen
+    path: .
     requires:
-      - name: task-managing-application-auth
-      - name: srv-api
       - name: task-managing-application-html5-repo-host
         parameters:
           content-target: true
-          config:
-            HTML5Runtime_enabled: true
+      - name: task-managing-application-html5-runtime
     build-parameters:
-      build-result: app/
+      build-result: resources/
       requires:
-        - name: taskmanagingapplicationtasks
+        - name: task-managingapp
           artifacts:
             - tasks.zip
-          target-path: app/
+          target-path: resources/
+ 
+  - name: task-managing-application-destinations
+    type: com.sap.application.content
+    requires:
+      - name: task-managing-application-auth
+        parameters:
+          service-key:
+            name: task-managing-application-auth-key
+      - name: task-managing-application-html5-repo-host
+        parameters:
+          service-key:
+            name: task-managing-application-html5-repo-host-key
+      - name: srv-api
+      - name: task-managing-application-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
     parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: task-managing-application-html5-repository
+              ServiceInstanceName: task-managing-application-html5-repo-host
+              ServiceKeyName: task-managing-application-html5-repo-host-key
+              sap.cloud.service: task-managing.service
+            - Name: task-managing-application-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: task-managing-application-auth
+              ServiceKeyName: task-managing-application-auth-key
+              sap.cloud.service: task-managing.service
+ 
+resources:
+  - name: task-managing-application-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+ 
+  - name: task-managing-application-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+ 
+  - name: task-managing-application-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: task-managing-application-${org}-${space}
+        tenant-mode: dedicated
+ 
+  - name: task-managing-application-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
       config:
         HTML5Runtime_enabled: true
         init_data:
           instance:
             existing_destinations_policy: update
             destinations:
-              - Name: srv-api
+              - Name: task-managing-application-srv-api
                 URL: ~{srv-api/srv-url}
                 Authentication: NoAuthentication
                 Type: HTTP
@@ -74,55 +143,17 @@ modules:
                 Authentication: NoAuthentication
                 Type: HTTP
                 ProxyType: Internet
-
-  - name: taskmanagingapplicationtasks
-    type: html5
-    path: app/tasks
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm ci
-        - npm run build
-      supported-platforms:
-        []
-
-resources:
-  - name: task-managing-application-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: task-managing-application-${org}-${space}
-        tenant-mode: dedicated
-        role-collections:
-          - name: 'praktikant (task-managing-application ${org}-${space})'
-            description: 'generated'
-            role-template-references:
-              - '$XSAPPNAME.praktikant'
-          - name: 'mitarbeiter (task-managing-application ${org}-${space})'
-            description: 'generated'
-            role-template-references:
-              - '$XSAPPNAME.mitarbeiter'
-          - name: 'chef (task-managing-application ${org}-${space})'
-            description: 'generated'
-            role-template-references:
-              - '$XSAPPNAME.chef'
-  - name: task-managing-application-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
-  - name: task-managing-application-destination
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-
-  - name: task-managing-application-html5-repo-host
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+ 
+  - name: task-managing-application-html5-runtime
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
-      service-plan: app-host
+      service-plan: app-runtime
+ 
