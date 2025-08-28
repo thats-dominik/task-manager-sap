@@ -3,8 +3,15 @@
   "sap.app": {
     "id": "tasks",
     "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": { "version": "0.0.1" },
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        ""
+      ]
+    },
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
@@ -17,7 +24,10 @@
       "mainService": {
         "uri": "/odata/v4/processor/",
         "type": "OData",
-        "settings": { "annotations": [], "odataVersion": "4.0" }
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -26,7 +36,10 @@
           "semanticObject": "Tasks",
           "action": "display",
           "title": "{{appTitle}}",
-          "signature": { "parameters": {}, "additionalParameters": "allowed" }
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
@@ -65,7 +78,10 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "tasks.i18n.i18n"
+          "bundleName": "tasks.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ]
         }
       },
       "": {
@@ -79,7 +95,12 @@
       },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
+        "uri": "i18n/i18n.properties",
+        "settings": {
+          "supportedLocales": [
+            ""
+          ]
+        }
       }
     },
     "resources": {
@@ -159,4 +180,3 @@
     "service": "taskmanaging.service"
   }
 }
-

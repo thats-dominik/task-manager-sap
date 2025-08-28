@@ -51,7 +51,7 @@
         "db": "hana",
         "auth": {
           "kind": "xsuaa"
-        }
+        } 
       },
       "destinations": true,
       "html5-runtime": true
