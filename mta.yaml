@@ -34,6 +34,10 @@ modules:
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
+      no-route: true
+      no-start: true
+      health-check-type: none
+      command: node node_modules/@sap/hdi-deploy/deploy.js --exit
     requires:
       - name: task-managing-application-db
  
@@ -90,12 +94,12 @@ modules:
             - Name: task-managing-application-html5-repository
               ServiceInstanceName: task-managing-application-html5-repo-host
               ServiceKeyName: task-managing-application-html5-repo-host-key
-              sap.cloud.service: task-managing.service
+              sap.cloud.service: taskmanaging.service
             - Name: task-managing-application-auth
               Authentication: OAuth2UserTokenExchange
               ServiceInstanceName: task-managing-application-auth
               ServiceKeyName: task-managing-application-auth-key
-              sap.cloud.service: task-managing.service
+              sap.cloud.service: taskmanaging.service
  
 resources:
   - name: task-managing-application-db
