@@ -177,6 +177,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "taskmanaging.service"
+    "service": "tasks.service"
   }
 }

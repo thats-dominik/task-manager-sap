@@ -4,7 +4,7 @@
   "routes": [
     {
       "source": "^/odata/(.*)$",
-      "target": "/odata/$1",
+      "target": "/odata/v4/processor/$1",
       "destination": "task-managing-application-srv-api",
       "authenticationType": "xsuaa",
       "csrfProtection": false
