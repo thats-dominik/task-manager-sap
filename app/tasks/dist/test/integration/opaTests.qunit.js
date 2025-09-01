@@ -1,2 +1,0 @@
-sap.ui.require(["sap/fe/test/JourneyRunner","ns/tasks/test/integration/FirstJourney","ns/tasks/test/integration/pages/TasksList","ns/tasks/test/integration/pages/TasksObjectPage"],function(s,t,e,n){"use strict";var s=new s({launchUrl:sap.ui.require.toUrl("ns/tasks")+"/index.html"});s.run({pages:{onTheTasksList:e,onTheTasksObjectPage:n}},t.run)});
-//# sourceMappingURL=opaTests.qunit.js.map

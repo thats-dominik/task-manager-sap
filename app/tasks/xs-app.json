@@ -7,8 +7,7 @@
       "target": "/odata/$1",
       "destination": "task-managing-application-srv-api",
       "authenticationType": "xsuaa",
-      "csrfProtection": false,
-      "forwardAuthToken": true  
+      "csrfProtection": false
     },
     {
       "source": "^/resources/(.*)$",
