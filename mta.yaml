@@ -1,5 +1,5 @@
 _schema-version: 3.3.0
-ID: incident-management
+ID: task-managing-application
 version: 1.0.0
 description: "A simple CAP project."
 parameters:
@@ -12,7 +12,7 @@ build-parameters:
         - npm ci
         - npx cds build --production
 modules:
-  - name: incident-management-srv
+  - name: task-managing-application-srv
     type: nodejs
     path: gen/srv
     parameters:
@@ -26,37 +26,37 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: incident-management-db
-      - name: incident-management-auth
-      - name: incident-management-destination
+      - name: task-managing-application-db
+      - name: task-managing-application-auth
+      - name: task-managing-application-destination
 
-  - name: incident-management-db-deployer
+  - name: task-managing-application-db-deployer
     type: hdb
     path: gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: incident-management-db
+      - name: task-managing-application-db
 
-  - name: incident-management-app-deployer
+  - name: task-managing-application-app-deployer
     type: com.sap.application.content
     path: .
     requires:
-      - name: incident-management-html5-repo-host
+      - name: task-managing-application-html5-repo-host
         parameters:
           content-target: true
-      - name: incident-management-html5-runtime
+      - name: task-managing-application-html5-runtime
     build-parameters:
       build-result: resources/
       requires:
-        - name: incidentmanagementincidents
+        - name: taskmanagingntasks
           artifacts:
-            - incidents.zip
+            - tasks.zip
           target-path: resources/
 
-  - name: incidentmanagementincidents
+  - name: taskmanagingntasks
     type: html5
-    path: app/incidents
+    path: app/tasks
     build-parameters:
       build-result: dist
       builder: custom
@@ -66,19 +66,19 @@ modules:
       supported-platforms:
         []
 
-  - name: incident-management-destinations
+  - name: task-managing-application-destinations
     type: com.sap.application.content
     requires:
-      - name: incident-management-auth
+      - name: task-managing-application-auth
         parameters:
           service-key:
-            name: incident-management-auth-key
-      - name: incident-management-html5-repo-host
+            name: task-managing-application-auth-key
+      - name: task-managing-application-html5-repo-host
         parameters:
           service-key:
-            name: incident-management-html5-repo-host-key
+            name: task-managing-application-html5-repo-host-key
       - name: srv-api
-      - name: incident-management-destination
+      - name: task-managing-application-destination
         parameters:
           content-target: true
     build-parameters:
@@ -88,37 +88,37 @@ modules:
         instance:
           existing_destinations_policy: update
           destinations:
-            - Name: incident-management-html5-repository
-              ServiceInstanceName: incident-management-html5-repo-host
-              ServiceKeyName: incident-management-html5-repo-host-key
-              sap.cloud.service: incidentmanagement.service
-            - Name: incident-management-auth
+            - Name: task-managing-application-html5-repository
+              ServiceInstanceName: task-managing-application-html5-repo-host
+              ServiceKeyName: task-managing-application-html5-repo-host-key
+              sap.cloud.service: taskmanaging.service
+            - Name: task-managing-application-auth
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: incident-management-auth
-              ServiceKeyName: incident-management-auth-key
-              sap.cloud.service: incidentmanagement.service
+              ServiceInstanceName: task-managing-application-auth
+              ServiceKeyName: task-managing-application-auth-key
+              sap.cloud.service: taskmanaging.service
 
 resources:
-  - name: incident-management-db
+  - name: task-managing-application-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: incident-management-html5-repo-host
+  - name: task-managing-application-html5-repo-host
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-host
-  - name: incident-management-auth
+  - name: task-managing-application-auth
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: incident-management-${org}-${space}
+        xsappname: task-managing-application-${org}-${space}
         tenant-mode: dedicated
-  - name: incident-management-destination
+  - name: task-managing-application-destination
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
@@ -129,7 +129,7 @@ resources:
           instance:
             existing_destinations_policy: update
             destinations:
-              - Name: incident-management-srv-api
+              - Name: task-managing-application-srv-api
                 URL: ~{srv-api/srv-url}
                 Authentication: NoAuthentication
                 Type: HTTP
@@ -148,7 +148,7 @@ resources:
           name: srv-api # must be used in xs-app.json as well
           url: ~{srv-url}
           forwardAuthToken: true
-  - name: incident-management-html5-runtime
+  - name: task-managing-application-html5-runtime
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
