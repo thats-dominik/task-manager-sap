@@ -18,7 +18,8 @@
     "@cap-js/cds-test": "^0.4.0",
     "@cap-js/cds-types": "^0.13.0",
     "@cap-js/sqlite": "^2",
-    "@sap/cds-dk": "^9.2.1"
+    "@sap/cds-dk": "^9.2.1",
+    "@ui5/cli": "^4.0.23"
   },
   "scripts": {
     "start": "cds-serve",
@@ -51,7 +52,7 @@
         "db": "hana",
         "auth": {
           "kind": "xsuaa"
-        } 
+        }
       },
       "destinations": true,
       "html5-runtime": true
@@ -59,9 +60,6 @@
     "added": {}
   },
   "sapux": [
-    "app/tasks",
-    "app/task-managing-application",
-    "app/tasks",
     "app/tasks"
   ]
 }
