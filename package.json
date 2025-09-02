@@ -27,39 +27,23 @@
     "test": "npx jest tests/test.js"
   },
   "cds": {
+    "odata": { "version": "v4" },
     "requires": {
-      "auth": {
-        "kind": "mocked",
-        "users": {
-          "heiko": {
-            "roles": [
-              "chef"
-            ]
-          },
-          "heiker": {
-            "roles": [
-              "mitarbeiter"
-            ]
-          },
-          "heikel": {
-            "roles": [
-              "praktikant"
-            ]
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "heiko":     { "roles": ["chef"] },
+            "heiker":    { "roles": ["mitarbeiter"] },
+            "heikel":    { "roles": ["praktikant"] }
           }
         }
       },
       "[production]": {
         "db": "hana",
-        "auth": {
-          "kind": "xsuaa"
-        }
-      },
-      "destinations": true,
-      "html5-runtime": true
-    },
-    "added": {}
+        "auth": "xsuaa"
+      }
+    }
   },
-  "sapux": [
-    "app/tasks"
-  ]
+  "sapux": ["app/tasks"]
 }
